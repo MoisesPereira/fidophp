@@ -1,9 +1,9 @@
-<?php header("Content-Type: text/html; charset=ISO-8859-1",true);?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>First App FidoPHP</title>
 
 	<style>
@@ -25,6 +25,8 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
@@ -39,5 +41,36 @@
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 </head>
+
+<div class="container">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="index.php">Home</a></li>
+		<li class="dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Clientes
+		    <span class="caret"></span></a>
+		    <ul class="dropdown-menu">
+		      <li><a href="index.php">Listar</a></li>
+		      <li><a href="cadastrar.php">Cadastrar</a></li>
+		    </ul>
+		</li>
+		<li class="dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Serviços
+		    <span class="caret"></span></a>
+		    <ul class="dropdown-menu">
+		      <li><a href="#">Listar</a></li>
+		      <li><a href="#">Cadastrar</a></li>
+		    </ul>
+		</li>
+		<li class="dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Retornos
+		    <span class="caret"></span></a>
+		    <ul class="dropdown-menu">
+		      <li><a href="#">Listar</a></li>
+		      <li><a href="#">Cadastrar</a></li>
+		    </ul>
+		</li>
+	</ul>
+</div>
+
 
 <body>

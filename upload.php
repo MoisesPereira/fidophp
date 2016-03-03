@@ -4,6 +4,18 @@ ini_set('display_errors', 1);
 
 require('./WideImage/lib/WideImage.php');
 
+$nome = utf8_decode($_POST['fname']);
+$email = utf8_decode($_POST['email']);
+$telefone = utf8_decode($_POST['phone']);
+$mensagem = utf8_decode($_POST['message']);
+
+$conn = mysqli_connect('localhost', 'root', '', 'fidophp');
+$sql = "insert into tb_cadastro (nome, telefone, email, mensagem) values ('{$nome}', '{$telefone}', '{$email}', '{$mensagem}');";
+
+$q = mysqli_query($conn, $sql);
+
+$retornoClientId = 2;
+
    if(isset($_FILES['imagem']))
    {
       date_default_timezone_set("Brazil/East"); //Definindo timezone padrão
@@ -11,6 +23,7 @@ require('./WideImage/lib/WideImage.php');
       $name = $_FILES['imagem']['name']; // Atribui um array com os nomes dos arquivos à variavel
 
       $tmp_name = $_FILES['imagem']['tmp_name']; // Atribui um array com os nomes temporarios
+
 
       $allowedExts = array(".gif", ".jpeg", ".jpg", ".png", ".bmp"); // Extensões permitidas
 
@@ -31,10 +44,26 @@ require('./WideImage/lib/WideImage.php');
             $image = $image->crop('center', 'center', 800, 600); //Corta a imagem do centro forçando sua altura e largura
 
             $image->saveToFile($dir.$new_name); //Salva a imagem
+
+   $sqlImg = "insert into tb_imagens (id_cadastrofk, descricao) values ({$retornoClientId}, '{$new_name}');";
+
+            //$conn = mysqli_connect('localhost', 'root', '', 'fidophp');
+            $qImg = mysqli_query($conn, $sqlImg);
+
+            if($qImg){
+               echo "cadastro realizado com sucesso!";
+               echo "<meta HTTP-EQUIV='refresh' CONTENT='2;URL=cadastrar.php'>";
+            }
          } 
 
       }
 
 
    }
+
+
+
+
+   
+
 ?>

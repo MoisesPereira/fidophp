@@ -19,16 +19,17 @@ require('header.php');
 							<th>Nome</th>
 							<th>Email</th>
 							<th>Telefone</th>
-							<th><?php echo htmlentities("Observações...."); ?></th>
+							<th>Observações</th>
 						</tr>
 					</thead>
 					<tbody>
 
 						<?php
-						$conn = mysqli_connect('localhost', 'root', '', 'fidophp');
-						$q = mysqli_query($conn, "select * from tb_cadastro");
+						$conn = mysqli_connect('localhost', 'root', '', 'Fido');
+						$q = mysqli_query($conn, "select * from tb_cliente");
 
 						while($t = mysqli_fetch_array($q)){
+							var_dump(utf8_encode($t[1]));
 							echo "<tr>";
 							echo "<td>$t[1]</td>";
 							echo "<td>$t[2]</td>";

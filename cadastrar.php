@@ -6,7 +6,7 @@ require('header.php');
     <div class="row">
         <div class="col-md-12">
             <div class="well well-sm">
-                <form class="form-horizontal" method="post" action="./insere.php">
+                <form class="form-horizontal" method="post" action="./upload.php" enctype="multipart/form-data">
                     <fieldset>
                         <legend class="text-center header">Cadastro de Clientes</legend>
 
