@@ -25,11 +25,13 @@ require('header.php');
 					<tbody>
 
 						<?php
+
 						$conn = mysqli_connect('localhost', 'root', '', 'Fido');
+						mysqli_set_charset($conn, 'utf8');
 						$q = mysqli_query($conn, "select * from tb_cliente");
 
 						while($t = mysqli_fetch_array($q)){
-							var_dump(utf8_encode($t[1]));
+							//var_dump(($t[1]));
 							echo "<tr>";
 							echo "<td>$t[1]</td>";
 							echo "<td>$t[2]</td>";

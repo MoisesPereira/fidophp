@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta charset="utf-8">
 	<title>First App FidoPHP</title>
 
 	<style>
@@ -67,6 +67,16 @@
 		    <ul class="dropdown-menu">
 		      <li><a href="#">Listar</a></li>
 		      <li><a href="#">Cadastrar</a></li>
+		    </ul>
+		</li>
+		<li class="dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Relatórios
+		    <span class="caret"></span></a>
+		    <ul class="dropdown-menu">
+		      <li><a href="#">Mensal</a></li>
+		      <li><a href="#">Data</a></li>
+		      <li><a href="#">Serviço</a></li>
+		      <li><a href="#">Valor</a></li>
 		    </ul>
 		</li>
 	</ul>
