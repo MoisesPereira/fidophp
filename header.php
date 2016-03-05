@@ -32,6 +32,8 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
@@ -66,5 +68,46 @@
   </script>
 
 </head>
+
+<div class="container">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="index.php">Home</a></li>
+		<li class="dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Clientes
+		    <span class="caret"></span></a>
+		    <ul class="dropdown-menu">
+		      <li><a href="index.php">Listar</a></li>
+		      <li><a href="cadastrar.php">Cadastrar</a></li>
+		    </ul>
+		</li>
+		<li class="dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Serviços
+		    <span class="caret"></span></a>
+		    <ul class="dropdown-menu">
+		      <li><a href="#">Listar</a></li>
+		      <li><a href="#">Cadastrar</a></li>
+		    </ul>
+		</li>
+		<li class="dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Retornos
+		    <span class="caret"></span></a>
+		    <ul class="dropdown-menu">
+		      <li><a href="#">Listar</a></li>
+		      <li><a href="#">Cadastrar</a></li>
+		    </ul>
+		</li>
+		<li class="dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Relatórios
+		    <span class="caret"></span></a>
+		    <ul class="dropdown-menu">
+		      <li><a href="#">Mensal</a></li>
+		      <li><a href="#">Data</a></li>
+		      <li><a href="#">Serviço</a></li>
+		      <li><a href="#">Valor</a></li>
+		    </ul>
+		</li>
+	</ul>
+</div>
+
 
 <body>

@@ -19,7 +19,7 @@ require('header.php');
 							<th>Nome</th>
 							<th>Email</th>
 							<th>Telefone</th>
-							<th><?php echo htmlentities("Observações...."); ?></th>
+							<th>Observações</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -32,7 +32,9 @@ require('header.php');
 						$query = "SELECT * FROM tb_cliente";
 						$q = mysqli_query($conn, $query);
 
+
 						while($t = mysqli_fetch_array($q)){
+							//var_dump(($t[1]));
 							echo "<tr>";
 							echo "<td>$t[1]</td>";
 							echo "<td>$t[2]</td>";
