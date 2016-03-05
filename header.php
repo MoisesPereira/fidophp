@@ -1,9 +1,9 @@
-<?php header("Content-Type: text/html; charset=ISO-8859-1",true);?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
 	<title>First App FidoPHP</title>
 
 	<style>
@@ -18,6 +18,13 @@
 	        color: #36A0FF;
 	    }
 	</style>
+
+
+
+
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,6 +44,26 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" 
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+
+	  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker({
+    	dateFormat: "dd/mm/yy",
+    	dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+    	dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+    	dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+    	monthNames: [  'Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro',
+    		'Outubro','Novembro','Dezembro'],
+	    monthNamesShort: [
+		    'Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set',
+		    'Out','Nov','Dez'],
+	    nextText: 'Próximo',
+	    prevText: 'Anterior'
+    });
+  });
+  </script>
 
 </head>
 

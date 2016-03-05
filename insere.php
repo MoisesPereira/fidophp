@@ -9,7 +9,7 @@ $mensagem = utf8_decode($_POST['message']);
 //print_r();
 
 
-$conn = mysqli_connect('localhost', 'root', '', 'fidophp');
+$conn = mysqli_connect('localhost', 'root', '', 'Fido');
 
 $sql = "insert into tb_cadastro (nome, telefone, email, mensagem) values ('{$nome}', '{$telefone}', '{$email}', '{$mensagem}');";
 

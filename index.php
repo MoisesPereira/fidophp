@@ -25,8 +25,12 @@ require('header.php');
 					<tbody>
 
 						<?php
-						$conn = mysqli_connect('localhost', 'root', '', 'fidophp');
-						$q = mysqli_query($conn, "select * from tb_cadastro");
+
+						include('Conexao.class.php');
+						$conn = Conexao::getInstace();
+					
+						$query = "SELECT * FROM tb_cliente";
+						$q = mysqli_query($conn, $query);
 
 						while($t = mysqli_fetch_array($q)){
 							echo "<tr>";
@@ -42,6 +46,7 @@ require('header.php');
 						}
 
 						?>
+
 
 					</tbody>
 				</table>

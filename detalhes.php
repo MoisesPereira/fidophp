@@ -1,12 +1,13 @@
 <?php
 require('header.php');
+require('Conexao.class.php');
 
 $idCliente = $_GET['id'];
 
+$conn = Conexao::getInstace();
+$q = mysqli_query($conn, "select * from tb_cliente where id_cliente = {$idCliente}");
+$t = mysqli_fetch_row($q);
 
-$conn = mysqli_connect('localhost', 'root', '', 'fidophp');
-						$q = mysqli_query($conn, "select * from tb_cadastro where id_cadastro = {$idCliente}");
-						$t = mysqli_fetch_row($q);
 
 ?>
 
@@ -40,11 +41,67 @@ $conn = mysqli_connect('localhost', 'root', '', 'fidophp');
                         </div>
 
                         <div class="form-group">
-                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-pencil-square-o bigicon"></i></span>
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
-                                <textarea class="form-control" id="message" name="message" rows="7"><?php echo $t[4]; ?></textarea>
+                                <input id="celular" name="celular" type="text" value="<?php echo $t[4]; ?>" placeholder="Celular" class="form-control">
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                            <div class="col-md-8">
+                                <input id="celular2" name="celular2" type="text" value="<?php echo $t[5]; ?>" placeholder="Celular2" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                            <div class="col-md-8">
+                                <input id="celular3" name="celular3" type="text" value="<?php echo $t[6]; ?>" placeholder="Celular3" class="form-control">
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                            <div class="col-md-8">
+                                <input id="endereco" name="endereco" type="text" value="<?php echo $t[7]; ?>" placeholder="Endereço" class="form-control">
+                            </div>
+                        </div> 
+
+                         <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                            <div class="col-md-8">
+                                <input id="bairro" name="bairro" type="text" value="<?php echo $t[10]; ?>" placeholder="Bairro" class="form-control">
+                            </div>
+                        </div> 
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                            <div class="col-md-8">
+                                <input id="cidade" name="cidade" type="text" value="<?php echo $t[11]; ?>" placeholder="Cidade" class="form-control">
+                            </div>
+                        </div>   
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                            <div class="col-md-8">
+                                <input id="estado" name="estado" type="text" value="<?php echo $t[12]; ?>" placeholder="Cidade" class="form-control">
+                            </div>
+                        </div>        
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                            <div class="col-md-8">
+                                <input id="cep" name="cep" type="text" value="<?php echo $t[13]; ?>" placeholder="CEP" class="form-control">
+                            </div>
+                        </div> 
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                            <div class="col-md-8">
+                                <input id="referencia" name="referencia" type="text" value="<?php echo $t[14]; ?>" placeholder="Ponto de Referencia" class="form-control">
+                            </div>
+                        </div>   
 
                         <div class="form-group">
                             <div class="col-md-12 text-center">

@@ -1,8 +1,21 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+require('Conexao.class.php');
 
-require('./WideImage/lib/WideImage.php');
+$nome = $_POST['fname'];
+$email = $_POST['email'];
+$telefone = $_POST['phone'];
+$celular = $_POST['celular'];
+$celular2 = $_POST['celular2'];
+$celular3 = $_POST['celular3'];
+$endereco = $_POST['endereco'];
+$bairro = $_POST['bairro'];
+$cidade = $_POST['cidade'];
+$estado = $_POST['estado'];
+$cep = $_POST['cep'];
+$referencia = $_POST['referencia'];
+$observacao = $_POST['observacao'];
+
+/*require('./WideImage/lib/WideImage.php');
 
    if(isset($_FILES['imagem']))
    {
@@ -35,6 +48,26 @@ require('./WideImage/lib/WideImage.php');
 
       }
 
+*/
 
-   }
+      try {
+         $conn = Conexao::getInstace();
+
+         $sql = "insert into tb_cliente (nome, email, telefone, celular, celular2, celular3, endereco, dt_cadastro,
+         bairro, cidade, estado, cep, referencia, observacao) values ('{$nome}', '{$email}', '{$telefone}', '{$celular}', '{$celular2}',
+         '{$celular3}', '{$endereco}', now(), '{$bairro}', '{$cidade}', '{$estado}', '{$cep}', '{$referencia}', '{$observacao}' );";
+
+         $q = mysqli_query($conn, $sql);
+
+          if($q){
+            echo "cadastro realizado com sucesso!";
+            echo "<meta HTTP-EQUIV='refresh' CONTENT='2;URL=cadastrar.php'>";
+         }
+      } catch (Exception $e) {
+         die($e);
+      }
+
+   
+
+   
 ?>
