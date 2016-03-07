@@ -1,5 +1,6 @@
 <?php
 require('header.php');
+require('Conexao.class.php');
 ?>
 
 <div class="container">
@@ -7,7 +8,7 @@ require('header.php');
         <div class="col-md-12">
         <div class="well well-sm">
         <fieldset>
-            <legend class="text-center header">Encontre o Clientes</legend>
+            <legend class="text-center header">Encontre Clientes</legend>
         </fieldset>
 
         <form class="form-inline" action="#" method="post" role="form">
@@ -25,13 +26,13 @@ require('header.php');
           </div>  
 
           <div class="form-group">
-            <label for="data-ini">Data-Ini:</label>
-            <input type="text" class="form-control" id="data-ini" name="data-ini">
+            <label for="data-ini">Ini:</label>
+            <input type="text" class="form-control" id="datepicker" name="data-ini">
           </div>  
 
           <div class="form-group">
-            <label for="data-fim">Data-Ini:</label>
-            <input type="text" class="form-control" id="data-fim" name="data-fim">
+            <label for="data-fim">Fim:</label>
+            <input type="text" class="form-control" id="datepicker2" name="data-fim">
           </div>  
 
           <button type="submit" class="btn btn-default">Submit</button>
@@ -44,17 +45,20 @@ require('header.php');
 
 <?php
 
-$nome = $_POST['nome'];
-$email = $_POST['email'];
-$telefone = $_POST['telefone'];
+$nome = isset($_POST['nome']) ? $_POST['nome'] : '';
+$email = isset($_POST['email']) ? $_POST['email'] : '';
+$telefone = isset($_POST['telefone']) ? $_POST['telefone'] : '';
+$dtIni = isset($_POST['data-ini']) ? explode("/", $_POST['data-ini']) : '';
+$dtFim = isset($_POST['data-fim']) ? explode("/", $_POST['data-fim']) : '';
 
-if( isset($nome) || isset($email) || isset($telefone) ){
+if( $nome != '' || $email != '' || $telefone != '' || $dtIni != '' || $dtFim != '' ){
 
 $qnome = ($nome != '')  ? "and nome like '%{$nome}%' " : '';
 $qemail = ($email != '') ? "and email like '%{$email}%' " : '';
 $qtelefone = ($telefone != '') ? "and telefone like '%{$telefone}%' " : '';
+$qData = ( empty($dtIni) && empty($dtFim) ) ? "and STR_TO_DATE('dt_cadastro','%Y-%m-%d') BETWEEN '{$dtIni[2]}-{$dtIni[1]}-{$dtIni[0]}' AND '{$dtFim[2]}-{$dtFim[1]}-{$dtFim[0]}'" : '';
 
-$queryN = "select * from tb_cliente where 1 = 1 {$qnome} {$qemail} {$qtelefone} ";
+$queryN = "select * from tb_cliente where 1 = 1 {$qnome} {$qemail} {$qtelefone} {$qData} ";
 
     ?>
     <table border="1" class="table table-hover">
@@ -69,9 +73,8 @@ $queryN = "select * from tb_cliente where 1 = 1 {$qnome} {$qemail} {$qtelefone} 
         <tbody>
     <?php
 
-    $conn = mysqli_connect('localhost', 'root', '', 'Fido');
-
-    var_dump($queryN);
+    
+    $conn = Conexao::getInstace();
     $q = mysqli_query($conn, $queryN);
 
     while($t = mysqli_fetch_array($q)){

@@ -19,9 +19,6 @@
 	    }
 	</style>
 
-
-
-
 	  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -32,8 +29,7 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-		
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
@@ -47,25 +43,36 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" 
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-
-
-	  <script>
-  $(function() {
-    $( "#datepicker" ).datepicker({
-    	dateFormat: "dd/mm/yy",
-    	dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
-    	dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
-    	dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
-    	monthNames: [  'Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro',
-    		'Outubro','Novembro','Dezembro'],
-	    monthNamesShort: [
-		    'Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set',
-		    'Out','Nov','Dez'],
-	    nextText: 'Próximo',
-	    prevText: 'Anterior'
-    });
-  });
-  </script>
+	<script>
+		$(function() {
+		$( "#datepicker" ).datepicker({
+			dateFormat: "dd/mm/yy",
+			dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+			dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+			dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+			monthNames: [  'Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro',
+				'Outubro','Novembro','Dezembro'],
+		    monthNamesShort: [
+			    'Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set',
+			    'Out','Nov','Dez'],
+		    nextText: 'Próximo',
+		    prevText: 'Anterior'
+		});
+		$( "#datepicker2" ).datepicker({
+			dateFormat: "dd/mm/yy",
+			dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+			dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+			dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+			monthNames: [  'Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro',
+				'Outubro','Novembro','Dezembro'],
+		    monthNamesShort: [
+			    'Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set',
+			    'Out','Nov','Dez'],
+		    nextText: 'Próximo',
+		    prevText: 'Anterior'
+		});
+		});
+	</script>
 
 </head>
 
@@ -76,8 +83,8 @@
 		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Clientes
 		    <span class="caret"></span></a>
 		    <ul class="dropdown-menu">
-		      <li><a href="index.php">Listar</a></li>
-		      <li><a href="cadastrar.php">Cadastrar</a></li>
+		      <li><a href="listagemClientes.php">Listar</a></li>
+		      <li><a href="cadastrarCliente.php">Cadastrar</a></li>
 		    </ul>
 		</li>
 		<li class="dropdown">
