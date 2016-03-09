@@ -83,16 +83,16 @@
 		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Clientes
 		    <span class="caret"></span></a>
 		    <ul class="dropdown-menu">
-		      <li><a href="listagemClientes.php">Listar</a></li>
-		      <li><a href="cadastrarCliente.php">Cadastrar</a></li>
+		      <li><a href="/listagemClientes.php">Listar</a></li>
+		      <li><a href="/cadastrarCliente.php">Cadastrar</a></li>
 		    </ul>
 		</li>
 		<li class="dropdown">
 		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Serviços
 		    <span class="caret"></span></a>
 		    <ul class="dropdown-menu">
-		      <li><a href="#">Listar</a></li>
-		      <li><a href="#">Cadastrar</a></li>
+		      <li><a href="/listagemServicos.php">Listar</a></li>
+		      <li><a href="/cadastrarServico.php">Cadastrar</a></li>
 		    </ul>
 		</li>
 		<li class="dropdown">

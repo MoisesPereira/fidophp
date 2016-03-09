@@ -166,6 +166,31 @@ $t = mysqli_fetch_assoc($q);
                             </div>
                         </div> 
 
+                        <p class="text-center header">Gastos</p>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                            <div class="col-md-8">
+                            <label>Gasto 1:</label>
+                                <input id="gasto1" name="gasto1" type="text" value="<?php echo $t['gasto1']; ?>" class="form-control">
+                            </div>
+                        </div> 
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                            <div class="col-md-8">
+                            <label>Observação:</label>
+                                <input id="observacao" name="observacao" type="text" value="<?php echo $t['observacao']; ?>"  class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                            <div class="col-md-8">
+                            <label>Tipo:</label>
+                                <input id="desc_servico" name="desc_servico" type="text" value="<?php echo $t['desc_servico']; ?>" class="form-control">
+                            </div>
+                        </div> 
                     
 
 

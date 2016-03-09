@@ -6,8 +6,7 @@ $idCliente = $_GET['id'];
 
 $conn = Conexao::getInstace();
 $q = mysqli_query($conn, "select * from tb_cliente where id_cliente = {$idCliente}");
-$t = mysqli_fetch_row($q);
-
+$t = mysqli_fetch_assoc($q);
 
 ?>
 
@@ -22,86 +21,115 @@ $t = mysqli_fetch_row($q);
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="fname" name="fname" type="text" value="<?php echo $t[1]; ?>" class="form-control">
+                                <input id="id_cliente" name="id_cliente" type="hidden" value="<?php echo $t['id_cliente']; ?>" class="form-control">
+                                <label>Nome:</label>
+                                <input id="fname" name="fname" type="text" value="<?php echo $t['nome']; ?>" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="email" name="email" type="text" value="<?php echo $t[2]; ?>" class="form-control">
+                                <label>Email:</label>
+                                <input id="email" name="email" type="text" value="<?php echo $t['email']; ?>" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
+                            <div class="col-md-8">
+                                <label>CPF / CNPJ:</label>
+                                <input id="cpf_cnpj" name="cpf_cnpj" type="text" value="<?php echo $t['cpf_cnpj']; ?>" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="phone" name="phone" type="text" value="<?php echo $t[3]; ?>" class="form-control">
+                                <label>Telefone:</label>
+                                <input id="phone" name="phone" type="text" value="<?php echo $t['telefone']; ?>" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="celular" name="celular" type="text" value="<?php echo $t[4]; ?>" placeholder="Celular" class="form-control">
+                                <label>Celular:</label>
+                                <input id="celular" name="celular" type="text" value="<?php echo $t['celular']; ?>" placeholder="Celular" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="celular2" name="celular2" type="text" value="<?php echo $t[5]; ?>" placeholder="Celular2" class="form-control">
+                                <label>Celular2:</label>
+                                <input id="celular2" name="celular2" type="text" value="<?php echo $t['celular2']; ?>" placeholder="Celular2" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="celular3" name="celular3" type="text" value="<?php echo $t[6]; ?>" placeholder="Celular3" class="form-control">
+                                <label>Celular3:</label>
+                                <input id="celular3" name="celular3" type="text" value="<?php echo $t['celular3']; ?>" placeholder="Celular3" class="form-control">
                             </div>
                         </div>
 
                          <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="endereco" name="endereco" type="text" value="<?php echo $t[7]; ?>" placeholder="Endereço" class="form-control">
+                                <label>Endereço:</label>
+                                <input id="endereco" name="endereco" type="text" value="<?php echo $t['endereco']; ?>" placeholder="Endereço" class="form-control">
                             </div>
                         </div> 
 
                          <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="bairro" name="bairro" type="text" value="<?php echo $t[10]; ?>" placeholder="Bairro" class="form-control">
+                                <label>Bairro:</label>
+                                <input id="bairro" name="bairro" type="text" value="<?php echo $t['bairro']; ?>" placeholder="Bairro" class="form-control">
                             </div>
                         </div> 
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="cidade" name="cidade" type="text" value="<?php echo $t[11]; ?>" placeholder="Cidade" class="form-control">
+                                <label>Cidade:</label>                            
+                                <input id="cidade" name="cidade" type="text" value="<?php echo $t['cidade']; ?>" placeholder="Cidade" class="form-control">
                             </div>
                         </div>   
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="estado" name="estado" type="text" value="<?php echo $t[12]; ?>" placeholder="Cidade" class="form-control">
+                                <label>Estado:</label>                            
+                                <input id="estado" name="estado" type="text" value="<?php echo $t['estado']; ?>" placeholder="Cidade" class="form-control">
                             </div>
                         </div>        
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="cep" name="cep" type="text" value="<?php echo $t[13]; ?>" placeholder="CEP" class="form-control">
+                                <label>CEP:</label>                            
+                                <input id="cep" name="cep" type="text" value="<?php echo $t['cep']; ?>" placeholder="CEP" class="form-control">
                             </div>
                         </div> 
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="referencia" name="referencia" type="text" value="<?php echo $t[14]; ?>" placeholder="Ponto de Referencia" class="form-control">
+                                <label>Referência:</label>                            
+                                <input id="referencia" name="referencia" type="text" value="<?php echo $t['referencia']; ?>" placeholder="Ponto de Referencia" class="form-control">
                             </div>
                         </div>   
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                            <div class="col-md-8">
+                                <label>Observação:</label>                            
+                                <textarea class="form-control" id="observacao" name="observacao" rows="7" ><?php echo $t['observacao']; ?></textarea>
+                            </div>
+                        </div>                           
 
                         <div class="form-group">
                             <div class="col-md-12 text-center">

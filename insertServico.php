@@ -5,22 +5,37 @@ ini_set("display_errors", 1);
 require('Conexao.class.php');
 require('./WideImage/lib/WideImage.php');
 
-$id = $_POST['id_cliente'];
-$nome = $_POST['nome_cliente'];
-$email = $_POST['email'];
-$telefone = $_POST['phone'];
-$tp_servico = $_POST['tp_servico'];
-$funcionario = $_POST['funcionario'];
-$valor = $_POST['valor'];
-$forma_pagamento = $_POST['forma_pagamento'];
-$concluido = $_POST['concluido'];
-$dt_entrega = $_POST['data-entrega'];
-$observacao = $_POST['message'];
+$id = isset($_POST['id_cliente']) ? $_POST['id_cliente'] : '';
+$nome = isset($_POST['nome_cliente']) ? $_POST['nome_cliente'] : '';
+$email = isset($_POST['email']) ? $_POST['email'] : '';
+$telefone = isset($_POST['phone']) ? $_POST['phone'] : '';
+$tp_servico = isset($_POST['tp_servico']) ? $_POST['tp_servico'] : '';
+$funcionario = isset($_POST['funcionario']) ? $_POST['funcionario'] : '';
+$forma_pagamento = isset($_POST['forma_pagamento']) ? $_POST['forma_pagamento'] : '';
+$valor = isset($_POST['valor']) ? $_POST['valor'] : '';
+$valor = str_replace(',','.',str_replace('.','',$valor));
+$concluido = isset($_POST['concluido']) ? $_POST['concluido'] : '';
+$dt_entrega = isset($_POST['data-entrega']) ? $_POST['data-entrega'] : '';
+$gasto1 = isset($_POST['gasto1']) ? $_POST['gasto1'] : '';
+$valor1 = isset($_POST['valor1']) ? $_POST['valor1'] : '';
+$gasto2 = isset($_POST['gasto2']) ? $_POST['gasto2'] : '';
+$valor2 = isset($_POST['valor2']) ? $_POST['valor2'] : '';
+$gasto3 = isset($_POST['gasto3']) ? $_POST['gasto3'] : '';
+$valor3 = isset($_POST['valor3']) ? $_POST['valor3'] : '';
+$gasto4 = isset($_POST['gasto4']) ? $_POST['gasto4'] : '';
+$valor4 = isset($_POST['valor4']) ? $_POST['valor4'] : '';
+$gasto5 = isset($_POST['gasto5']) ? $_POST['gasto5'] : '';
+$valor5 = isset($_POST['valor5']) ? $_POST['valor5'] : '';
+$observacao = isset($_POST['message']) ? $_POST['message'] : '';
 
 $conn = Conexao::getInstace();
 $sql = "insert into tb_servico (tipo_servico, funcionario, valor, forma_pagamento, concluido, dt_cadastro,
-   tb_cliente_id_cliente, dt_entrega, observacao) values ('{$tp_servico}', '{$funcionario}', '{$valor}', 
-   '{$forma_pagamento}', '{$concluido}', now(), '{$id}', '{$dt_entrega}', '{$observacao}');";
+         tb_cliente_id_cliente, dt_entrega, observacao, gasto1, valor1, gasto2, valor2, gasto3, valor3, 
+         gasto4, valor4, gasto5, valor5) 
+      values 
+         ({$tp_servico}, {$funcionario}, '{$valor}', {$forma_pagamento}, '{$concluido}', now(), '{$id}',
+            '{$dt_entrega}', '{$observacao}', '{$gasto1}', '{$valor1}', '{$gasto2}', '{$valor2}', 
+            '{$gasto3}', '{$valor3}', '{$gasto4}', '{$valor4}', '{$gasto5}', '{$valor5}');";
 
 $q = mysqli_query($conn, $sql);
 
@@ -66,7 +81,7 @@ $returnId = mysqli_insert_id($conn);
 
             if($qImg){
                echo "cadastro realizado com sucesso!";
-               echo "<meta HTTP-EQUIV='refresh' CONTENT='2;URL=cadastrar.php'>";
+               echo "<meta HTTP-EQUIV='refresh' CONTENT='2;URL=cadastrarServico.php'>";
             }
          } 
 

@@ -6,7 +6,7 @@ require('header.php');
     <div class="row">
         <div class="col-md-12">
             <div class="well well-sm">
-                <form class="form-horizontal" method="post" action="./upload.php" enctype="multipart/form-data">
+                <form class="form-horizontal" method="post" action="./insertCliente.php" enctype="multipart/form-data">
                     <fieldset>
                         <legend class="text-center header">Cadastro de Clientes</legend>
 
@@ -23,6 +23,13 @@ require('header.php');
                                 <input id="email" name="email" type="text" placeholder="Email" class="form-control">
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
+                            <div class="col-md-8">
+                                <input id="cpf_cnpj" name="cpf_cnpj" type="text" placeholder="CPF - CNPJ" class="form-control">
+                            </div>
+                        </div>                        
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>

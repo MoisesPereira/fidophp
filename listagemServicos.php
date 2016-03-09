@@ -4,6 +4,11 @@ require('Conexao.class.php');
 
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 $nome = isset($_GET['nome']) ? $_GET['nome'] : '';
+$funcionario = isset($_POST['funcionario']) ? $_POST['funcionario'] : '';
+$dt_entrega = isset($_POST['dt_entrega']) ? $_POST['dt_entrega'] : '';
+$concluido = isset($_POST['concluido']) ? $_POST['concluido'] : '';
+$tp_servico = isset($_POST['tp_servico']) ? $_POST['tp_servico'] : '';
+
 ?>
 
 <!-- mascara para cobrir o site -->  
@@ -23,9 +28,13 @@ $nome = isset($_GET['nome']) ? $_GET['nome'] : '';
             <input id="cliente" name="cliente" type="text" value="<?=$nome; ?>" placeholder="Cliente" class="form-control">
           </div>
 
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Funcionario" id="funcionario" name="funcionario">
-          </div>
+            <div class="form-group">
+                <div class="col-md-8">
+                    <select id="funcionario" name="funcionario" placeholder="Escolha o Funcionario" class="form-control"> 
+                        <option value="">Selecione o Funcionario</option> 
+                    </select>
+                </div>
+            </div>
 
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Data Entrega" id="datepicker" name="dt_entrega">
@@ -145,6 +154,27 @@ $(document).ready(function(){
             console.log( 'Deu merda', response ); 
         }
     });
+
+    // Busca os funcionarios cadastrados
+        $.ajax({
+            url: 'http://fidophp.com.br/getFuncionario.ajax.php',
+            success: function(response){
+
+                var parse = JSON.parse(response);
+                var count = Object.keys(parse).length;
+
+                for (var i = 0; i < count; i++) {
+
+                    var option = "<option value="+parse[i].id_funcionario+">"+parse[i].nome+"</option>";
+                    
+                    $('#funcionario').append(option);
+                };
+
+            },
+            error: function( response ) {
+                console.log( 'Deu merda', response ); 
+            }
+    });        
 });
 
 // Chama o popup de de Lista Clientes
@@ -231,37 +261,31 @@ $(document).ready(function(){
 
 <?php
 
-$id = isset($_POST['id_cliente']) ? $_POST['id_cliente'] : '';
-$funcionario = isset($_POST['funcionario']) ? $_POST['funcionario'] : '';
-/*$dt_entrega = isset($_POST['dt_entrega']) ? $_POST['dt_entrega'] : '';
-$concluido = isset($_POST['concluido']) ? $_POST['concluido'] : '';
-$tp_servico = isset($_POST['tp_servico']) ? $_POST['tp_servico'] : '';
-*/
-
 //if( $id != '' || $funcionario != '' || $dt_entrega != '' || $concluido != '' || $tp_servico != '' ){
 if( $id != '' || $funcionario != '' ){
 
-$qid = ($id != '')  ? "and tb_cliente_id_cliente = {$id} " : '';
-$qfuncionario = ($funcionario != '') ? "and funcionario = '%{$funcionario}%' " : '';
+//$qid = ($id != '')  ? "and tb_cliente_id_cliente = {$id} " : '';
+//$qfuncionario = ($funcionario != '') ? "and funcionario = '%{$funcionario}%' " : '';
+
 /*$qtelefone = ($telefone != '') ? "and telefone like '%{$telefone}%' " : '';
 $qData = ( empty($dtIni) && empty($dtFim) ) ? "and STR_TO_DATE('dt_cadastro','%Y-%m-%d') BETWEEN '{$dtIni[2]}-{$dtIni[1]}-{$dtIni[0]}' AND '{$dtFim[2]}-{$dtFim[1]}-{$dtFim[0]}'" : '';
 */
 
-$queryN = "select * from tb_servico ss inner join tipo_servico ts 
-    where 1 = 1 
-    {$qid} {$qfuncionario}
-    and ss.tipo_servico = ts.id_tipo_servico";
+$queryN = "select * from tb_servico ss, tb_funcionario tf, tipo_servico ts
+            where tb_cliente_id_cliente = {$id}
+            and ss.tipo_servico = ts.id_tipo_servico
+            and ss.funcionario = tf.id_funcionario;";
 
     ?>
     <table border="1" class="table table-hover">
         <thead>
         <tr>
-            <th>Funcionário</th>
-            <th>Valor</th>
             <th>Tipo Serviço</th>
+            <th>Valor</th>
+            <th>Funcionário</th>
             <th>Data Entrega</th>
             <th>Concluido</th>
-            <th>Data Entrega</th>
+            <th>Observação</th>
             <th>Selecione</th>
         </tr>
         </thead>
@@ -273,15 +297,14 @@ $queryN = "select * from tb_servico ss inner join tipo_servico ts
     $q = mysqli_query($conn, $queryN);
 
     while($t = mysqli_fetch_assoc($q)){
-        //var_dump($t);
-        
+       
         echo "<tr>";
-        echo "<td>{$t['funcionario']}</td>";
-        echo "<td>{$t['valor']}</td>";
         echo "<td>{$t['descricao']}</td>";
+        echo "<td>{$t['valor']}</td>";
+        echo "<td>{$t['nome']}</td>";
         echo "<td>{$t['dt_entrega']}</td>";
         echo "<td>{$t['concluido']}</td>";
-        echo "<td>{$t['dt_entrega']}</td>";
+        echo "<td>{$t['observacao']}</td>";
         echo "<td><a href='/detalhesServico.php?id={$t['id_servico']}'>Selecionar</a></td>";
         echo "</tr>";
     }

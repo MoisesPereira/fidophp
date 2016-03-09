@@ -18,7 +18,7 @@ $telefone = isset($_GET['telefone']) ? $_GET['telefone'] : '';
     <div class="row">
         <div class="col-md-12">
             <div class="well well-sm">
-                <form class="form-horizontal" method="post" action="./cadastrarServico.php" enctype="multipart/form-data">
+                <form class="form-horizontal" method="post" action="./insertServico.php" enctype="multipart/form-data">
                     <fieldset>
                         <legend class="text-center header">Novo Serviço</legend>
 
@@ -61,9 +61,20 @@ $telefone = isset($_GET['telefone']) ? $_GET['telefone'] : '';
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
-                                <input id="funcionario" name="funcionario" type="text" placeholder="Funcionario" class="form-control">
+                                <select id="funcionario" name="funcionario" placeholder="Escolha o Funcionario" class="form-control"> 
+                                    <option value="">Selecione o Funcionario</option> 
+                                </select>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                            <div class="col-md-8">
+                                <select id="forma_pagamento" name="forma_pagamento" class="form-control"> 
+                                    <option value="">Selecione a Forma de Pagamento</option> 
+                                </select>
+                            </div>
+                        </div>                         
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
@@ -71,13 +82,6 @@ $telefone = isset($_GET['telefone']) ? $_GET['telefone'] : '';
                                 <input id="valor" name="valor" type="text" placeholder="Valor" class="form-control">
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
-                            <div class="col-md-8">
-                                <input id="forma_pagamento" name="forma_pagamento" type="text" placeholder="Forma Pagamento" class="form-control">
-                            </div>
-                        </div> 
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
@@ -97,6 +101,64 @@ $telefone = isset($_GET['telefone']) ? $_GET['telefone'] : '';
                             </div>
                         </div> 
 
+                        <p class="text-center header">Gastos / Custos</p>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                            <div class="col-md-8">
+                            <label>Gasto 1:</label>
+                                <input id="gasto1" name="gasto1" type="text" class="form-control">
+                            
+                            <label>Valor 1:</label>
+                                <input id="valor1" name="valor1" type="text" class="form-control">
+                            </div>
+                        </div>    
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                            <div class="col-md-8">
+                            <label>Gasto 2:</label>
+                                <input id="gasto2" name="gasto2" type="text" class="form-control">
+                            
+                            <label>Valor 2:</label>
+                                <input id="valor2" name="valor2" type="text" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                            <div class="col-md-8">
+                            <label>Gasto 3:</label>
+                                <input id="gasto3" name="gasto3" type="text" class="form-control">
+                            
+                            <label>Valor 3:</label>
+                                <input id="valor3" name="valor3" type="text" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                            <div class="col-md-8">
+                            <label>Gasto 4:</label>
+                                <input id="gasto4" name="gasto4" type="text" class="form-control">
+                            
+                            <label>Valor 4:</label>
+                                <input id="valor4" name="valor4" type="text" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                            <div class="col-md-8">
+                            <label>Gasto 5:</label>
+                                <input id="gasto5" name="gasto5" type="text" class="form-control">
+                            
+                            <label>Valor 5:</label>
+                                <input id="valor5" name="valor5" type="text" class="form-control">
+                            </div>
+                        </div>                        
+
+
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-img-square bigicon"></i></span>
                             <div class="col-md-8">
@@ -104,7 +166,12 @@ $telefone = isset($_GET['telefone']) ? $_GET['telefone'] : '';
                                 <input id="imagem" name="imagem[]" type="file" placeholder="imagem" class="form-control">
                                 <input id="imagem" name="imagem[]" type="file" placeholder="imagem" class="form-control">
                                 <input id="imagem" name="imagem[]" type="file" placeholder="imagem" class="form-control">
-
+                                <input id="imagem" name="imagem[]" type="file" placeholder="imagem" class="form-control">
+                                <input id="imagem" name="imagem[]" type="file" placeholder="imagem" class="form-control">
+                                <input id="imagem" name="imagem[]" type="file" placeholder="imagem" class="form-control">
+                                <input id="imagem" name="imagem[]" type="file" placeholder="imagem" class="form-control">
+                                <input id="imagem" name="imagem[]" type="file" placeholder="imagem" class="form-control">
+                                <input id="imagem" name="imagem[]" type="file" placeholder="imagem" class="form-control"> 
                             </div>
                         </div>                        
 
@@ -163,7 +230,7 @@ $telefone = isset($_GET['telefone']) ? $_GET['telefone'] : '';
             <legend class="text-center header">Encontre Clientes</legend>
         </fieldset>
 
-        <form class="form-inline" action="#" method="post" role="form">
+        <form class="form-inline" action="./cadastrarServico.php" method="post" role="form">
           <div class="form-group">
             <label for="nome">Nome:</label>
             <input type="text" class="form-control" id="nome" name="nome">
@@ -204,24 +271,67 @@ $telefone = isset($_GET['telefone']) ? $_GET['telefone'] : '';
 
 // Popula o Combo Box de Serviços
 $(document).ready(function(){
+    // Busca os tipos de Serviços
         $.ajax({
-        url: 'http://fidophp.com.br/getServicos.ajax.php',
-        success: function(response){
+            url: 'http://fidophp.com.br/getServicos.ajax.php',
+            success: function(response){
 
-            var parse = JSON.parse(response);
-            var count = Object.keys(parse).length;
+                var parse = JSON.parse(response);
+                var count = Object.keys(parse).length;
 
-            for (var i = 0; i < count; i++) {
+                for (var i = 0; i < count; i++) {
 
-                var option = "<option value="+parse[i].id_tipo_servico+">"+parse[i].descricao+"</option>";
-                
-                $('#tp_servico').append(option);
-            };
+                    var option = "<option value="+parse[i].id_tipo_servico+">"+parse[i].descricao+"</option>";
+                    
+                    $('#tp_servico').append(option);
+                };
 
-        },
-        error: function( response ) {
-            console.log( 'Deu merda', response ); 
-        }
+            },
+            error: function( response ) {
+                console.log( 'Deu merda', response ); 
+            }
+    });
+
+    // Busca os funcionarios cadastrados
+        $.ajax({
+            url: 'http://fidophp.com.br/getFuncionario.ajax.php',
+            success: function(response){
+
+                var parse = JSON.parse(response);
+                var count = Object.keys(parse).length;
+
+                for (var i = 0; i < count; i++) {
+
+                    var option = "<option value="+parse[i].id_funcionario+">"+parse[i].nome+"</option>";
+                    
+                    $('#funcionario').append(option);
+                };
+
+            },
+            error: function( response ) {
+                console.log( 'Deu merda', response ); 
+            }
+    });
+
+    // Busca as formas de pagamento
+        $.ajax({
+            url: 'http://fidophp.com.br/getFormaPagamento.ajax.php',
+            success: function(response){
+
+                var parse = JSON.parse(response);
+                var count = Object.keys(parse).length;
+
+                for (var i = 0; i < count; i++) {
+
+                    var option = "<option value="+parse[i].id_forma_pagamento+">"+parse[i].descricao+"</option>";
+                    
+                    $('#forma_pagamento').append(option);
+                };
+
+            },
+            error: function( response ) {
+                console.log( 'Deu merda', response ); 
+            }
     });
 });
 
@@ -229,7 +339,7 @@ $(document).ready(function(){
 $('#buscar-cliente').click(function(event) {
     var param = window.location.search;
     if(param){
-        window.location.href = 'servico.php';
+        window.location.href = 'cadastrarServico.php';
     }
     else{
         $('#janela1').dialog({modal: true, height: 590, width: 1005 });
@@ -254,7 +364,7 @@ $('#submit-cliente').click(function(event) {
                 var table = "<tr><td>" + parse[i].nome + "</td>";
                 table += "<td>" + parse[i].email + "</td>"; 
                 table += "<td>" + parse[i].telefone + "</td>";  
-                table += "<td><a href='/servico.php?id=" + parse[i].id_cliente + "&nome="+
+                table += "<td><a href='/cadastrarServico.php?id=" + parse[i].id_cliente + "&nome="+
                      parse[i].nome + "&email="+parse[i].email+ "&telefone=" +parse[i].telefone+ "'>Selecionar</a></td></tr>";  
 
                 $('#rstable tbody').append(table);
