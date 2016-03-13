@@ -9,23 +9,23 @@ $id = isset($_POST['id_cliente']) ? $_POST['id_cliente'] : '';
 $nome = isset($_POST['nome_cliente']) ? $_POST['nome_cliente'] : '';
 $email = isset($_POST['email']) ? $_POST['email'] : '';
 $telefone = isset($_POST['phone']) ? $_POST['phone'] : '';
-$tp_servico = isset($_POST['tp_servico']) ? $_POST['tp_servico'] : '';
-$funcionario = isset($_POST['funcionario']) ? $_POST['funcionario'] : '';
-$forma_pagamento = isset($_POST['forma_pagamento']) ? $_POST['forma_pagamento'] : '';
-$valor = isset($_POST['valor']) ? $_POST['valor'] : '';
+$tp_servico = ($_POST['tp_servico'] == '') ? 8 : $_POST['tp_servico'];
+$funcionario = ($_POST['funcionario'] == '') ? 5 : $_POST['funcionario'];
+$forma_pagamento = ($_POST['forma_pagamento'] == '') ? 6 : $_POST['forma_pagamento'];
+$valor = ($_POST['valor'] == '') ? 0 : $_POST['valor'];
 $valor = str_replace(',','.',str_replace('.','',$valor));
-$concluido = isset($_POST['concluido']) ? $_POST['concluido'] : '';
+$concluido = ($_POST['concluido'] == '') ? 0 : $_POST['concluido'];
 $dt_entrega = isset($_POST['data-entrega']) ? $_POST['data-entrega'] : '';
 $gasto1 = isset($_POST['gasto1']) ? $_POST['gasto1'] : '';
-$valor1 = isset($_POST['valor1']) ? $_POST['valor1'] : '';
+$valor1 = ($_POST['valor1'] == '') ? 0 : $_POST['valor1'];
 $gasto2 = isset($_POST['gasto2']) ? $_POST['gasto2'] : '';
-$valor2 = isset($_POST['valor2']) ? $_POST['valor2'] : '';
+$valor2 = ($_POST['valor2'] == '') ? 0 : $_POST['valor2'];
 $gasto3 = isset($_POST['gasto3']) ? $_POST['gasto3'] : '';
-$valor3 = isset($_POST['valor3']) ? $_POST['valor3'] : '';
+$valor3 = ($_POST['valor3'] == '') ? 0 : $_POST['valor3'];
 $gasto4 = isset($_POST['gasto4']) ? $_POST['gasto4'] : '';
-$valor4 = isset($_POST['valor4']) ? $_POST['valor4'] : '';
+$valor4 = ($_POST['valor4'] == '') ? 0 : $_POST['valor4'];
 $gasto5 = isset($_POST['gasto5']) ? $_POST['gasto5'] : '';
-$valor5 = isset($_POST['valor5']) ? $_POST['valor5'] : '';
+$valor5 = ($_POST['valor5'] == '') ? 0 : $_POST['valor5'];
 $observacao = isset($_POST['message']) ? $_POST['message'] : '';
 
 $conn = Conexao::getInstace();
@@ -33,7 +33,7 @@ $sql = "insert into tb_servico (tipo_servico, funcionario, valor, forma_pagament
          tb_cliente_id_cliente, dt_entrega, observacao, gasto1, valor1, gasto2, valor2, gasto3, valor3, 
          gasto4, valor4, gasto5, valor5) 
       values 
-         ({$tp_servico}, {$funcionario}, '{$valor}', {$forma_pagamento}, '{$concluido}', now(), '{$id}',
+         ('{$tp_servico}', '{$funcionario}', '{$valor}', '{$forma_pagamento}', '{$concluido}', now(), '{$id}',
             '{$dt_entrega}', '{$observacao}', '{$gasto1}', '{$valor1}', '{$gasto2}', '{$valor2}', 
             '{$gasto3}', '{$valor3}', '{$gasto4}', '{$valor4}', '{$gasto5}', '{$valor5}');";
 
@@ -42,7 +42,7 @@ $q = mysqli_query($conn, $sql);
 // Este metodo pega o id do Serviço para cadastrar na tabela de imagens
 $returnId = mysqli_insert_id($conn);
 
-//var_dump($returnId);
+//var_dump($sql);
 //exit;
 
    if(isset($_FILES['imagem']))
@@ -77,15 +77,29 @@ $returnId = mysqli_insert_id($conn);
          $sqlImg = "insert into tb_imagem (descricao, dt_cadastro, tb_servico_id_servico) values ('{$new_name}', now(), '{$returnId}');";
 
             //$conn = mysqli_connect('localhost', 'root', '', 'fidophp');
-            $qImg = mysqli_query($conn, $sqlImg);
+            try {
 
-            if($qImg){
-               echo "cadastro realizado com sucesso!";
-               echo "<meta HTTP-EQUIV='refresh' CONTENT='2;URL=cadastrarServico.php'>";
+               $qImg = mysqli_query($conn, $sqlImg);
+
+               //var_dump($sqlImg);
+               //die('55');
+
+               if($qImg){
+                  echo "cadastro realizado com sucesso!";
+                  echo "<meta HTTP-EQUIV='refresh' CONTENT='2;URL=detalhesServico.php?id={$returnId}'>";
+               }
+               
+            } catch (Exception $e) {
+               
+               print_r($e);
             }
+            
          } 
 
       }
-}      
+}    
+
+echo "cadastro realizado com sucesso!";
+echo "<meta HTTP-EQUIV='refresh' CONTENT='2;URL=detalhesServico.php?id={$returnId}'>"  
 
 ?>

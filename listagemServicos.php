@@ -4,8 +4,11 @@ require('Conexao.class.php');
 
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 $nome = isset($_GET['nome']) ? $_GET['nome'] : '';
+
+$ordem_servico = isset($_POST['ordem_servico']) ? $_POST['ordem_servico'] : '';
 $funcionario = isset($_POST['funcionario']) ? $_POST['funcionario'] : '';
-$dt_entrega = isset($_POST['dt_entrega']) ? $_POST['dt_entrega'] : '';
+$dt_ini = isset($_POST['dt_inicial']) ? $_POST['dt_inicial'] : '';
+$dt_fim = isset($_POST['dt_final']) ? $_POST['dt_final'] : '';
 $concluido = isset($_POST['concluido']) ? $_POST['concluido'] : '';
 $tp_servico = isset($_POST['tp_servico']) ? $_POST['tp_servico'] : '';
 
@@ -23,22 +26,33 @@ $tp_servico = isset($_POST['tp_servico']) ? $_POST['tp_servico'] : '';
         </fieldset>
 
         <form class="form-inline" action="#" method="post" role="form">
+
+
+          <div class="form-group" >
+                <input class="form-control" id="ordem_servico" name="ordem_servico" type="text" placeholder="Ordem Serviço" value="<?=$ordem_servico; ?>" >
+          </div>
+
           <div class="form-group">
-            <input id="id_cliente" name="id_cliente" type="hidden" value="<?=$id; ?>" class="form-control">
-            <input id="cliente" name="cliente" type="text" value="<?=$nome; ?>" placeholder="Cliente" class="form-control">
+                <input id="cliente" name="cliente" type="text" value="<?=$nome; ?>" placeholder="Cliente" class="form-control">
           </div>
 
             <div class="form-group">
                 <div class="col-md-8">
                     <select id="funcionario" name="funcionario" placeholder="Escolha o Funcionario" class="form-control"> 
-                        <option value="">Selecione o Funcionario</option> 
+                        <option value="">Funcionario</option> 
                     </select>
                 </div>
             </div>
 
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Data Entrega" id="datepicker" name="dt_entrega">
+            <input type="text" class="form-control" placeholder="Entrega Inicial" id="datepicker" name="dt-ini">
+            <input type="hidden" id="dt_inicial" placeholder="data inicial" name="dt_inicial" class="form-control">
           </div>  
+
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Entrega Final" id="datepicker2" name="dt_fim">
+            <input type="hidden" id="dt_final" name="dt_final" class="form-control">
+          </div>           
 
           <div class="form-group">
             <select id="concluido" name="concluido" class="form-control"> 
@@ -47,91 +61,16 @@ $tp_servico = isset($_POST['tp_servico']) ? $_POST['tp_servico'] : '';
                 <option value="1">Sim</option> 
             </select>
           </div>  
+            
+            <button type='submit' class='btn btn-default'>Pesquisar</button>
+            <a href='/listagemServicos.php' class='btn btn-default'>Limpar</a>
 
-          <div class="form-group">
-             <select id="tp_servico" name="tp_servico" placeholder="Escolha o Serviço" class="form-control"> 
-                <option value="">Selecione o Serviço</option> 
-            </select>
-          </div>  
-
-          <button type="submit" class="btn btn-default">Submit</button>
         </form>
 
         </div>
         </div>
     </div>
 
-<style>
-.window{
-    display:none;
-    width:300px;
-    height:300px;
-    position:absolute;
-    left:0;
-    top:0;
-    background:#FFF;
-    z-index:9900;
-    padding:10px;
-    border-radius:10px;
-}
- 
-#mascara{
-    display:none;
-    position:absolute;
-    left:0;
-    top:0;
-    z-index:9000;
-    background-color:#000;
-}
- 
-.fechar{display:block; text-align:right;}
-</style>
-
-<div class="window" id="janela1">
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-        <div class="well well-sm">
-        <fieldset>
-            <legend class="text-center header">Encontre Cliente</legend>
-        </fieldset>
-
-        <form class="form-inline" action="#" method="post" role="form">
-          <div class="form-group">
-            <label for="nome">Nome:</label>
-            <input type="text" class="form-control" id="nome" name="nome">
-          </div>
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="text" class="form-control" id="email" name="email">
-          </div>
-          <div class="form-group">
-            <label for="telefone">Tel:</label>
-            <input type="text" class="form-control" id="telefone" name="telefone">
-          </div>  
-
-          <p id="submit-cliente" class="btn btn-default">Submit</p>
-        </form>
-
-        </div>
-        </div>
-    </div>
-
-    <table border="1" id="rstable" class="table table-hover">
-        <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Escolha o Cliente</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-    </table>
-
-</div>
 
 <script>
 
@@ -177,114 +116,63 @@ $(document).ready(function(){
     });        
 });
 
+$('#datepicker').change(function(){
+    var dt_ini = $('#datepicker').datepicker({dateFormat: 'dd,MM,YYYY'}).val();
+    $('input').append($('#dt_inicial').attr("value", dt_ini));
+});
+
+$('#datepicker2').change(function(){
+    var dt_final = $('#datepicker2').datepicker({dateFormat: 'dd,MM,YYYY'}).val();
+    $('input').append($('#dt_final').attr("value", dt_final));
+});
+
 // Chama o popup de de Lista Clientes
 $('#cliente').click(function(event) {
     var param = window.location.search;
     if(param){
-        window.location.href = 'listagemServicos.php';
+        window.location.href = 'encontreClientes.php';
     }
     else{
-        $('#janela1').dialog({modal: true, height: 590, width: 1005 });
+        window.location.href = 'encontreClientes.php';
     }
 });
 
-//Chama o ajax que retorna os clientes
-$('#submit-cliente').click(function(event) {
-    //alert('11');
-
-    var nome = $('#nome').val();
-    var email = $('#email').val();
-    var telefone = $('#telefone').val();
-
-    $.ajax({
-        url: 'http://fidophp.com.br/getClientes.ajax.php?nome='+nome+'&email='+email+'&telefone='+telefone,
-        success: function(response){
-
-            console.log('retorno cliente: ', response);
-
-            var parse = JSON.parse(response);
-            var count = Object.keys(parse).length;
-
-            for (var i = 0; i < count; i++) {
-                var table = "<tr><td>" + parse[i].nome + "</td>";
-                table += "<td>" + parse[i].email + "</td>"; 
-                table += "<td>" + parse[i].telefone + "</td>";  
-                table += "<td><a href='/listagemServicos.php?id=" + parse[i].id_cliente + "&nome="+
-                     parse[i].nome + "'>Selecionar</a></td></tr>";  
-
-                $('#rstable tbody').append(table);
-            };
-
-        },
-        error: function( response ) {
-            console.log( 'Deu merda', response ); 
-        }
-    });
-    
-});
-
-$(document).ready(function(){
-    $("a[rel=modal]").click( function(ev){
-        ev.preventDefault();
- 
-        var id = $(this).attr("href");
- 
-        var alturaTela = $(document).height();
-        var larguraTela = $(window).width();
-     
-        //colocando o fundo preto
-        $('#mascara').css({'width':larguraTela,'height':alturaTela});
-        $('#mascara').fadeIn(1000); 
-        $('#mascara').fadeTo("slow",0.8);
- 
-        var left = ($(window).width() /2) - ( $(id).width() / 2 );
-        var top = ($(window).height() / 2) - ( $(id).height() / 2 );
-     
-        $(id).css({'top':top,'left':left});
-        $(id).show();   
-    });
- 
-    $("#mascara").click( function(){
-        $(this).hide();
-        $(".window").hide();
-    });
- 
-    $('.fechar').click(function(ev){
-        ev.preventDefault();
-        $("#mascara").hide();
-        $(".window").hide();
-    });
-});
 </script>
 
-</div>
 
 <?php
 
-//if( $id != '' || $funcionario != '' || $dt_entrega != '' || $concluido != '' || $tp_servico != '' ){
-if( $id != '' || $funcionario != '' ){
+if( $id != '' || $ordem_servico != '' || $funcionario != '' || $dt_ini != '' || $dt_fim != '' || $concluido != '' ){
 
-//$qid = ($id != '')  ? "and tb_cliente_id_cliente = {$id} " : '';
-//$qfuncionario = ($funcionario != '') ? "and funcionario = '%{$funcionario}%' " : '';
+$qid = ($id != '')  ? "and tb_cliente_id_cliente = {$id} " : '';
+$qordem_servico = ($ordem_servico != '') ? "and ss.id_servico = {$ordem_servico} " : '';
+$qfuncionario = ($funcionario != '') ? "and funcionario = '{$funcionario}' " : '';
+$qdata = ($dt_ini != '') ? "and dt_entrega between '{$dt_ini}' and '{$dt_fim}' " : '';
+$qconcluido = ($concluido != '') ? "and concluido = '{$concluido}' " : '';
 
-/*$qtelefone = ($telefone != '') ? "and telefone like '%{$telefone}%' " : '';
-$qData = ( empty($dtIni) && empty($dtFim) ) ? "and STR_TO_DATE('dt_cadastro','%Y-%m-%d') BETWEEN '{$dtIni[2]}-{$dtIni[1]}-{$dtIni[0]}' AND '{$dtFim[2]}-{$dtFim[1]}-{$dtFim[0]}'" : '';
-*/
-
-$queryN = "select * from tb_servico ss, tb_funcionario tf, tipo_servico ts
-            where tb_cliente_id_cliente = {$id}
-            and ss.tipo_servico = ts.id_tipo_servico
-            and ss.funcionario = tf.id_funcionario;";
+$queryN =  "select format(ss.valor,2,'de_DE') valor_total, ss.observacao obs, ss.*, tf.*, ts.*, tc.* from tb_servico ss
+                 inner join tb_funcionario tf 
+                    on ss.funcionario = tf.id_funcionario
+                 inner join tipo_servico ts
+                    on ss.tipo_servico = ts.id_tipo_servico
+                 inner join tb_cliente tc
+                    on ss.tb_cliente_id_cliente = tc.id_cliente
+            where 1 = 1
+            {$qid}
+            {$qordem_servico}
+            {$qfuncionario}
+            {$qdata}
+            {$qconcluido};";    
 
     ?>
     <table border="1" class="table table-hover">
         <thead>
         <tr>
-            <th>Tipo Serviço</th>
+            <th>Cliente</th>
             <th>Valor</th>
-            <th>Funcionário</th>
-            <th>Data Entrega</th>
+            <th>Entrega</th>
             <th>Concluido</th>
+            <th>Serviço</th>            
             <th>Observação</th>
             <th>Selecione</th>
         </tr>
@@ -297,14 +185,16 @@ $queryN = "select * from tb_servico ss, tb_funcionario tf, tipo_servico ts
     $q = mysqli_query($conn, $queryN);
 
     while($t = mysqli_fetch_assoc($q)){
+
+        $conc = $t['concluido'] == 0 ? 'Não' : 'Sim';
        
         echo "<tr>";
-        echo "<td>{$t['descricao']}</td>";
-        echo "<td>{$t['valor']}</td>";
         echo "<td>{$t['nome']}</td>";
+        echo "<td>{$t['valor_total']}</td>";
         echo "<td>{$t['dt_entrega']}</td>";
-        echo "<td>{$t['concluido']}</td>";
-        echo "<td>{$t['observacao']}</td>";
+        echo "<td>{$conc}</td>";
+        echo "<td>{$t['descricao']}</td>";
+        echo "<td>{$t['obs']}</td>";
         echo "<td><a href='/detalhesServico.php?id={$t['id_servico']}'>Selecionar</a></td>";
         echo "</tr>";
     }

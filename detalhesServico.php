@@ -10,23 +10,34 @@ $query = "select tc.nome cliente, tc.email, tc.telefone, tc.celular, tc.celular2
         tc.cidade, tc.estado, tc.cep, tc.referencia, format(ss.valor,2,'de_DE') valor, ss.concluido, ss.dt_entrega,
         ss.observacao, ss.gasto1, format(ss.valor1,2,'de_DE') valor1, ss.gasto2, format(ss.valor2,2,'de_DE') valor2, 
         ss.gasto3, format(ss.valor3,2,'de_DE') valor3, ss.gasto4, format(ss.valor4,2,'de_DE') valor4,
-        ss.gasto5, format(ss.valor5,2,'de_DE') valor5, tf.nome, ts.descricao desc_servico, ti.descricao desc_imagem, tfp.descricao
-    from tb_servico ss, tipo_servico ts, tb_cliente tc, tb_imagem ti, tb_funcionario tf, tb_forma_pagamento tfp
-    where ss.id_servico = 32
-        and ss.tipo_servico = ts.id_tipo_servico
-        and tc.id_cliente = ss.tb_cliente_id_cliente
-        and tf.id_funcionario = ss.funcionario
-        and tfp.id_forma_pagamento = ss.forma_pagamento
-        and ss.id_servico = ti.tb_servico_id_servico;";
+        ss.gasto5, format(ss.valor5,2,'de_DE') valor5, tf.id_funcionario, tf.nome, ts.id_tipo_servico, 
+        ts.descricao desc_servico, tfp.id_forma_pagamento, tfp.descricao
+    from tb_servico ss
+    inner join tipo_servico ts
+        on ss.tipo_servico = ts.id_tipo_servico
+    inner join tb_cliente tc
+        on ss.tb_cliente_id_cliente = tc.id_cliente
+    inner join tb_funcionario tf
+        on ss.funcionario = tf.id_funcionario
+    inner join tb_forma_pagamento tfp
+        on ss.forma_pagamento = tfp.id_forma_pagamento
+    where ss.id_servico = {$id}";
 
-$q = mysqli_query($conn, $query);
-$t = mysqli_fetch_assoc($q);
+$queryImg = "select * from tb_imagem where tb_servico_id_servico = {$id}";
+
+$rstQuery = mysqli_query($conn, $query);
+$rstImage = mysqli_query($conn, $queryImg);
+
+$t = mysqli_fetch_assoc($rstQuery);
+
+$data_entrega = explode('-', $t['dt_entrega']);
+$data_entrega = $data_entrega[2].'/'.$data_entrega[1].'/'.$data_entrega[0];
 
 $imagens = array();
 $i = 0;
 
-while($img = mysqli_fetch_assoc($q)){
-    $imagens[$i] = $img['desc_imagem'];
+while($img = mysqli_fetch_assoc($rstImage)){
+    $imagens[$i] = $img['descricao'];
     $i++;
 }
 
@@ -36,9 +47,9 @@ while($img = mysqli_fetch_assoc($q)){
     <div class="row">
         <div class="col-md-12">
             <div class="well well-sm">
-                <form class="form-horizontal" method="post" action="./alterarServico.php">
+                <form class="form-horizontal" method="post" action="./alterarServico.php" enctype="multipart/form-data">
                     <fieldset>
-                        <legend class="text-center header">Detalhes do Serviço</legend>
+                        <legend class="text-center header">Ordem de Serviço: <b style='color:red'><?=$id; ?></b> </legend>
 
                         <p class="text-center header">Cliente</p>
 
@@ -47,7 +58,7 @@ while($img = mysqli_fetch_assoc($q)){
                             <div class="col-md-8">
                             <label>Nome:</label>
                                 <input id="id_servico" name="id_servico" type="hidden" value="<?=$id; ?>" class="form-control">
-                                <input id="fname" name="fname" type="text" value="<?php echo $t['cliente']; ?>" class="form-control">
+                                <input id="fname" name="fname" disabled type="text" value="<?php echo $t['cliente']; ?>" class="form-control">
                             </div>
                         </div>
 
@@ -55,7 +66,7 @@ while($img = mysqli_fetch_assoc($q)){
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
                             <div class="col-md-8">
                             <label>Email:</label>
-                                <input id="email" name="email" type="text" value="<?php echo $t['email']; ?>" class="form-control">
+                                <input id="email" name="email" disabled type="text" value="<?php echo $t['email']; ?>" class="form-control">
                             </div>
                         </div>
 
@@ -63,7 +74,7 @@ while($img = mysqli_fetch_assoc($q)){
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
                             <label>Telefone:</label>
-                                <input id="phone" name="phone" type="text" value="<?php echo $t['telefone']; ?>" class="form-control">
+                                <input id="phone" name="phone" disabled type="text" value="<?php echo $t['telefone']; ?>" class="form-control">
                             </div>
                         </div>
 
@@ -71,7 +82,7 @@ while($img = mysqli_fetch_assoc($q)){
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
                             <label>Celular:</label>
-                                <input id="celular" name="celular" type="text" value="<?php echo $t['celular']; ?>" placeholder="Celular" class="form-control">
+                                <input id="celular" name="celular" disabled type="text" value="<?php echo $t['celular']; ?>" placeholder="Celular" class="form-control">
                             </div>
                         </div>
 
@@ -79,7 +90,7 @@ while($img = mysqli_fetch_assoc($q)){
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
                             <label>Celular 2:</label>
-                                <input id="celular2" name="celular2" type="text" value="<?php echo $t['celular2']; ?>" placeholder="Celular2" class="form-control">
+                                <input id="celular2" name="celular2" disabled type="text" value="<?php echo $t['celular2']; ?>" placeholder="Celular2" class="form-control">
                             </div>
                         </div>
 
@@ -87,7 +98,7 @@ while($img = mysqli_fetch_assoc($q)){
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
                             <label>Endereço:</label>
-                                <input id="endereco" name="endereco" type="text" value="<?php echo $t['endereco']; ?>" placeholder="Endereço" class="form-control">
+                                <input id="endereco" name="endereco" disabled type="text" value="<?php echo $t['endereco']; ?>" placeholder="Endereço" class="form-control">
                             </div>
                         </div>
 
@@ -95,7 +106,7 @@ while($img = mysqli_fetch_assoc($q)){
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
                             <label>Bairro:</label>
-                                <input id="bairro" name="bairro" type="text" value="<?php echo $t['bairro']; ?>" placeholder="Bairro" class="form-control">
+                                <input id="bairro" name="bairro" disabled type="text" value="<?php echo $t['bairro']; ?>" placeholder="Bairro" class="form-control">
                             </div>
                         </div> 
 
@@ -103,7 +114,7 @@ while($img = mysqli_fetch_assoc($q)){
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
                             <label>Cidade:</label>
-                                <input id="cidade" name="cidade" type="text" value="<?php echo $t['cidade']; ?>" placeholder="Cidade" class="form-control">
+                                <input id="cidade" name="cidade" disabled type="text" value="<?php echo $t['cidade']; ?>" placeholder="Cidade" class="form-control">
                             </div>
                         </div>   
 
@@ -111,7 +122,7 @@ while($img = mysqli_fetch_assoc($q)){
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
                             <label>Estado:</label>
-                                <input id="estado" name="estado" type="text" value="<?php echo $t['estado']; ?>" placeholder="Cidade" class="form-control">
+                                <input id="estado" name="estado" disabled type="text" value="<?php echo $t['estado']; ?>" placeholder="Cidade" class="form-control">
                             </div>
                         </div>        
 
@@ -119,7 +130,7 @@ while($img = mysqli_fetch_assoc($q)){
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
                             <label>CEP:</label>
-                                <input id="cep" name="cep" type="text" value="<?php echo $t['cep']; ?>" placeholder="CEP" class="form-control">
+                                <input id="cep" name="cep" disabled type="text" value="<?php echo $t['cep']; ?>" placeholder="CEP" class="form-control">
                             </div>
                         </div> 
 
@@ -127,7 +138,7 @@ while($img = mysqli_fetch_assoc($q)){
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
                             <label>Referência:</label>
-                                <input id="referencia" name="referencia" type="text" value="<?php echo $t['referencia']; ?>" placeholder="Ponto de Referencia" class="form-control">
+                                <input id="referencia" name="referencia" disabled type="text" value="<?php echo $t['referencia']; ?>" placeholder="Ponto de Referencia" class="form-control">
                             </div>
                         </div>   
 
@@ -139,7 +150,9 @@ while($img = mysqli_fetch_assoc($q)){
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
                             <label>Funcionario:</label>
-                                <input id="funcionario" name="funcionario" type="text" value="<?php echo $t['nome']; ?>" class="form-control">
+                                <select id="funcionario" name="funcionario" placeholder="Escolha o Funcionario" class="form-control"> 
+                                    <option value="<?php echo $t['id_funcionario']; ?>" selected><?php echo $t['nome']; ?></option> 
+                                </select>
                             </div>
                         </div> 
 
@@ -155,7 +168,9 @@ while($img = mysqli_fetch_assoc($q)){
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
                             <label>Forma de Pagamento:</label>
-                                <input id="forma_pagamento" name="forma_pagamento" type="text" value="<?php echo $t['descricao']; ?>" class="form-control">
+                                <select id="forma_pagamento" name="forma_pagamento" placeholder="Forma Pagamento" class="form-control"> 
+                                    <option value="<?php echo $t['id_forma_pagamento']; ?>" selected><?php echo $t['descricao']; ?></option> 
+                                </select>                                
                             </div>
                         </div> 
 
@@ -174,15 +189,18 @@ while($img = mysqli_fetch_assoc($q)){
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
                             <label>Data de Entrega:</label>
-                                <input id="dt_entrega" name="dt_entrega" type="text" value="<?php echo $t['dt_entrega']; ?>" class="form-control">
+                                <input id="datepicker" name="dt_entrega" type="text" value="<?php echo $data_entrega; ?>" class="form-control">
+                                <input type="hidden" id="data_entrega" name="data_entrega" class="form-control">
                             </div>
                         </div> 
 
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
-                            <label>Tipo:</label>
-                                <input id="desc_servico" name="desc_servico" type="text" value="<?php echo $t['desc_servico']; ?>" class="form-control">
+                                <label>Tipo de Serviço:</label>
+                                 <select id="tp_servico" name="tp_servico" placeholder="Escolha o Serviço" class="form-control"> 
+                                    <option value="<?php echo $t['id_tipo_servico']; ?>" selected><?php echo $t['desc_servico']; ?></option> 
+                                 </select>
                             </div>
                         </div>                         
 
@@ -261,11 +279,31 @@ while($img = mysqli_fetch_assoc($q)){
 
                     <div class="row">
                          <? for($j=0; $j<count($imagens); $j++){
-                                echo "<div class='col-lg-3 col-sm-4 col-6'><a href='#' >
-                                        <img src='./uploads/$imagens[$j]' class='thumbnail img-responsive'></a>
-                                      </div>";
-                         } ?>
+                             
+                                echo "<div class='col-lg-3 col-sm-4 col-6' id='remove-{$j}'><a href='#img_fim' class='{$j}' >";
+                                echo    "<div class='remover_img'>Deletar</div>";
+                                echo        "<img src='./uploads/$imagens[$j]' class='thumbnail img-responsive'>";
+                                echo "</div>";
+                         } 
+                         echo "<div id='img_fim'></div>";
+                         ?>
+
                     </div>
+
+                    <?php 
+
+                        if($k=count($imagens) < 9){
+                            echo "<div class='form-group'>";
+                            echo "<span class='col-md-1 col-md-offset-2 text-center'><i class='fa fa-img-square bigicon'></i></span>";
+                            echo "<div class='col-md-8'>";
+                            for($k=count($imagens); $k<=9; $k++ ){
+                                echo "<input id='imagem' name='imagem[]' type='file' placeholder='imagem' class='form-control'>";
+                            }
+                            echo "</div>";
+                            echo "</div>";
+                        }
+                        
+                    ?>
 
                     <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
                       <div class="modal-dialog">
@@ -282,7 +320,6 @@ while($img = mysqli_fetch_assoc($q)){
                     <div class="form-group">
                         <div class="col-md-12 text-center">
                             <button type="submit" class="btn btn-primary btn-lg">Alterar</button>
-                            <button type="submit" class="btn btn-primary btn-lg">Deletar</button>
                         </div>
                     </div>
                     </fieldset>
@@ -293,7 +330,99 @@ while($img = mysqli_fetch_assoc($q)){
 </div>
 
 
+<script>
 
+$('#datepicker').change(function(){
+    var dt_entrega = $('#datepicker').datepicker({dateFormat: 'dd,MM,YYYY'}).val();
+    $('input').append($('#data_entrega').attr("value", dt_entrega));
+});
+
+$('.remover_img').click(function(){
+    var remover = $('.col-lg-3').html();
+    var id = remover.substring(26, 27)
+    var img = remover.substring(87, 112);
+    console.log('remover:', id);
+
+    // Deleta a imagem
+        $.ajax({
+            url: 'http://fidophp.com.br/Ajax/removeImage.ajax.php?img='+img,
+            success: function(response){
+
+                console.log('Deu Certo', response);
+            },
+            error: function( response ) {
+                console.log( 'Deu merda', response ); 
+            }
+    });    
+
+    $('#remove-'+id).remove();
+
+});
+
+$(document).ready(function(){
+
+        // Busca os Serviços
+        $.ajax({
+        url: 'http://fidophp.com.br/getServicos.ajax.php',
+        success: function(response){
+
+            var parse = JSON.parse(response);
+            var count = Object.keys(parse).length;
+
+            for (var i = 0; i < count; i++) {
+
+                var option = "<option value="+parse[i].id_tipo_servico+">"+parse[i].descricao+"</option>";
+                $('#tp_servico').append(option);
+            };
+        },
+        error: function( response ) {
+            console.log( 'Deu merda', response ); 
+        }
+    });
+
+        // Busca as formas de pagamento
+        $.ajax({
+            url: 'http://fidophp.com.br/getFormaPagamento.ajax.php',
+            success: function(response){
+
+                var parse = JSON.parse(response);
+                var count = Object.keys(parse).length;
+
+                for (var i = 0; i < count; i++) {
+
+                    var option = "<option value="+parse[i].id_forma_pagamento+">"+parse[i].descricao+"</option>";
+                    
+                    $('#forma_pagamento').append(option);
+                };
+
+            },
+            error: function( response ) {
+                console.log( 'Deu merda', response ); 
+            }
+    });
+
+    // Busca os funcionarios cadastrados
+        $.ajax({
+            url: 'http://fidophp.com.br/getFuncionario.ajax.php',
+            success: function(response){
+
+                var parse = JSON.parse(response);
+                var count = Object.keys(parse).length;
+
+                for (var i = 0; i < count; i++) {
+
+                    var option = "<option value="+parse[i].id_funcionario+">"+parse[i].nome+"</option>";
+                    
+                    $('#funcionario').append(option);
+                };
+
+            },
+            error: function( response ) {
+                console.log( 'Deu merda', response ); 
+            }
+    });        
+});
+</script>
 
 </body>
 

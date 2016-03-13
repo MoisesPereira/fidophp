@@ -4,28 +4,16 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<title>First App FidoPHP</title>
-
-	<style>
-	    .header {
-	        color: #36A0FF;
-	        font-size: 27px;
-	        padding: 10px;
-	    }
-
-	    .bigicon {
-	        font-size: 35px;
-	        color: #36A0FF;
-	    }
-
-	    .modal-dialog {width:600px;}
-		.thumbnail {margin-bottom:6px;}
-		
-	</style>
+	<title>Sistema FIDOTI</title>
 
 	  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	  <link rel="stylesheet" href="/css/main.css">
 	  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>	  
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -89,7 +77,10 @@
 
 </head>
 
-<div class="container">
+<? $actual_link = $_SERVER['PHP_SELF'];
+
+if($actual_link != '/orcamento.php'){ ?>
+	<div class="container">
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="index.php">Home</a></li>
 		<li class="dropdown">
@@ -128,6 +119,8 @@
 		</li>
 	</ul>
 </div>
+<? } ?>
+
 
 
 <body>
