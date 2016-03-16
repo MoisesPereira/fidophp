@@ -14,7 +14,7 @@ $t = mysqli_fetch_assoc($q);
     <div class="row">
         <div class="col-md-12">
             <div class="well well-sm">
-                <form class="form-horizontal" method="post" action="./alterar.php">
+                <form class="form-horizontal" method="post" action="/alterarCliente.php">
                     <fieldset>
                         <legend class="text-center header">Detalhes do Clientes</legend>
 
@@ -134,7 +134,6 @@ $t = mysqli_fetch_assoc($q);
                         <div class="form-group">
                             <div class="col-md-12 text-center">
                                 <button type="submit" class="btn btn-primary btn-lg">Alterar</button>
-                                <button type="submit" class="btn btn-primary btn-lg">Deletar</button>
                             </div>
                         </div>
                     </fieldset>

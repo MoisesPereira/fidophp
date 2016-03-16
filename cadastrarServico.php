@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
+//error_reporting(E_ALL);
+//ini_set("display_errors", 1);
 require('header.php');
 require('Conexao.class.php');
 
@@ -89,6 +89,13 @@ $telefone = isset($_GET['telefone']) ? $_GET['telefone'] : '';
                                     <option value="0">Não</option> 
                                     <option value="1">Sim</option> 
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" placeholder="Data Entrada" id="datepicker2" name="data-entrada">
                             </div>
                         </div>
 

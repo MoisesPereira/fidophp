@@ -99,7 +99,7 @@ if($actual_link != '/orcamento.php'){ ?>
 		      <li><a href="/cadastrarServico.php">Cadastrar</a></li>
 		    </ul>
 		</li>
-		<li class="dropdown">
+		<!--<li class="dropdown">
 		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Retornos
 		    <span class="caret"></span></a>
 		    <ul class="dropdown-menu">
@@ -116,7 +116,7 @@ if($actual_link != '/orcamento.php'){ ?>
 		      <li><a href="#">Serviço</a></li>
 		      <li><a href="#">Valor</a></li>
 		    </ul>
-		</li>
+		</li>-->
 	</ul>
 </div>
 <? } ?>

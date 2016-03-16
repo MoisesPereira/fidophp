@@ -4,6 +4,8 @@ ini_set("display_errors", 1);
 
 require('Conexao.class.php');
 require('./WideImage/lib/WideImage.php');
+$data_entrada = isset($_POST['data-entrada']) ? $_POST['data-entrada'] : '';
+if($data_entrada != ''){$data_entrada = explode('/', $data_entrada); $data_entrada = $data_entrada[2].'-'.$data_entrada[1].'-'.$data_entrada[0];}
 
 $id = isset($_POST['id_cliente']) ? $_POST['id_cliente'] : '';
 $nome = isset($_POST['nome_cliente']) ? $_POST['nome_cliente'] : '';
@@ -33,7 +35,7 @@ $sql = "insert into tb_servico (tipo_servico, funcionario, valor, forma_pagament
          tb_cliente_id_cliente, dt_entrega, observacao, gasto1, valor1, gasto2, valor2, gasto3, valor3, 
          gasto4, valor4, gasto5, valor5) 
       values 
-         ('{$tp_servico}', '{$funcionario}', '{$valor}', '{$forma_pagamento}', '{$concluido}', now(), '{$id}',
+         ('{$tp_servico}', '{$funcionario}', '{$valor}', '{$forma_pagamento}', '{$concluido}', '{$data_entrada}', '{$id}',
             '{$dt_entrega}', '{$observacao}', '{$gasto1}', '{$valor1}', '{$gasto2}', '{$valor2}', 
             '{$gasto3}', '{$valor3}', '{$gasto4}', '{$valor4}', '{$gasto5}', '{$valor5}');";
 

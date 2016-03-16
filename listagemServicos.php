@@ -144,6 +144,16 @@ $('#cliente').click(function(event) {
 
 if( $id != '' || $ordem_servico != '' || $funcionario != '' || $dt_ini != '' || $dt_fim != '' || $concluido != '' ){
 
+if( isset($dt_ini) ){
+    $dt_ini = explode('/', $dt_ini);
+    $dt_ini = $dt_ini[2] . '-' . $dt_ini[1] .'-'. $dt_ini[0]; 
+}
+
+if( isset($dt_fim) ){
+    $dt_fim = explode('/', $dt_fim);
+    $dt_fim = $dt_fim[2] . '-' . $dt_fim[1] .'-'. $dt_fim[0];
+}
+
 $qid = ($id != '')  ? "and tb_cliente_id_cliente = {$id} " : '';
 $qordem_servico = ($ordem_servico != '') ? "and ss.id_servico = {$ordem_servico} " : '';
 $qfuncionario = ($funcionario != '') ? "and funcionario = '{$funcionario}' " : '';
@@ -184,14 +194,21 @@ $queryN =  "select format(ss.valor,2,'de_DE') valor_total, ss.observacao obs, ss
     $conn = Conexao::getInstace();
     $q = mysqli_query($conn, $queryN);
 
+    $hoje = date('d/m/Y');
+
     while($t = mysqli_fetch_assoc($q)){
 
         $conc = $t['concluido'] == 0 ? 'Não' : 'Sim';
+        $dt_entrega = explode('-', $t['dt_entrega']);
+        $dt_entrega = $dt_entrega[2] .'/'. $dt_entrega[1] .'/'. $dt_entrega[0];
+
+
        
-        echo "<tr>";
+        $tabela = ($dt_entrega == $hoje && $conc == 'Não') ?  "<tr style='color:red'>" :  "<tr>";
+        echo $tabela;
         echo "<td>{$t['nome']}</td>";
         echo "<td>{$t['valor_total']}</td>";
-        echo "<td>{$t['dt_entrega']}</td>";
+        echo "<td>{$dt_entrega}</td>";
         echo "<td>{$conc}</td>";
         echo "<td>{$t['descricao']}</td>";
         echo "<td>{$t['obs']}</td>";

@@ -1,60 +1,112 @@
 <?php
 require('header.php');
+require('Conexao.class.php');
+
+$query = "select date_format(ts.dt_cadastro, '%c') mes, ts.valor from tb_servico ts";
+
+$conn = Conexao::getInstace();
+$q = mysqli_query($conn, $query);
+
+
+$valor=0;
+$mes=0;
+$countMes = array();
+
+$i=1;
+
+
+while($t = mysqli_fetch_assoc($q)){
+    var_dump($t);
+    var_dump($t['mes']);
+    //echo "<br>";
+    if($t['mes'] == $i){
+        $mes = $mes + 1;
+        $valor += (float)$t['valor'];
+    }
+   /* $mes[$i] = $t['mes'];
+    $valor[$i] = $t['valor'];
+    $i++;*/
+
+}
+
+echo "Valor";
+var_dump($valor);
+echo "<br><br>";
+echo "Mes";
+var_dump($mes);
+
 ?>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="well well-sm">
+<div id="container" style="height: 400px"></div>
 
-					<fieldset>
-						<legend class="text-center header">Listagem dos Clientes</legend>
+<style>
+#container {
+    height: 700px; 
+    min-width: 310px; 
+    max-width: 800px;
+    margin: 0 auto;
+}
+</style>
 
-					</fieldset>
-				</div>
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Relatório Anual'
+        },
+        subtitle: {
+            text: 'Média Serviço x Valor'
+        },
+        xAxis: {
+            categories: [
+                'Jan',
+                'Fev',
+                'Mar',
+                'Abr',
+                'Mai',
+                'Jun',
+                'Jul',
+                'Ago',
+                'Set',
+                'Out',
+                'Nov',
+                'Dez'
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Valor R$'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.3f} </b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Serviço',
+            data: [18, 15, 20, 18]
 
-				<table border="1" class="table table-hover">
-					<thead>
-						<tr>
-							<th>Nome</th>
-							<th>Email</th>
-							<th>Telefone</th>
-							<th>Observações</th>
-						</tr>
-					</thead>
-					<tbody>
+        }, {
+            name: 'Valor R$',
+            data: [35.500, 45.250, 54.000, 23.000]
 
-						<?php
+        }]
+    });
+});
 
-						include('Conexao.class.php');
-						$conn = Conexao::getInstace();
-					
-						$query = "SELECT * FROM tb_cliente";
-						$q = mysqli_query($conn, $query);
-
-
-						while($t = mysqli_fetch_array($q)){
-							//var_dump(($t[1]));
-							echo "<tr>";
-							echo "<td>$t[1]</td>";
-							echo "<td>$t[2]</td>";
-							echo "<td>$t[3]</td>";
-							$tam = strlen($t[4]);
-							$max = 50;
-							$texto = substr_replace($t[4], "...", $max, $tam - $max);
-							echo "<td><a href='/detalhes.php/?id={$t[0]}'>{$texto}</a></td>";
-							echo "</tr>";
-
-						}
-
-						?>
-
-
-					</tbody>
-				</table>
-			</div>
-
-		</body>
-
-		</html>
-
+</script>

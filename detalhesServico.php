@@ -122,7 +122,7 @@ while($img = mysqli_fetch_assoc($rstImage)){
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                             <div class="col-md-8">
                             <label>Estado:</label>
-                                <input id="estado" name="estado" disabled type="text" value="<?php echo $t['estado']; ?>" placeholder="Cidade" class="form-control">
+                                <input id="estado" name="estado" disabled type="text" value="<?php echo $t['estado']; ?>" placeholder="Estado" class="form-control">
                             </div>
                         </div>        
 
@@ -190,7 +190,7 @@ while($img = mysqli_fetch_assoc($rstImage)){
                             <div class="col-md-8">
                             <label>Data de Entrega:</label>
                                 <input id="datepicker" name="dt_entrega" type="text" value="<?php echo $data_entrega; ?>" class="form-control">
-                                <input type="hidden" id="data_entrega" name="data_entrega" class="form-control">
+                                <input type="hidden" id="data_entrega" value="<?php echo $data_entrega; ?>" name="data_entrega" class="form-control">
                             </div>
                         </div> 
 
@@ -280,7 +280,7 @@ while($img = mysqli_fetch_assoc($rstImage)){
                     <div class="row">
                          <? for($j=0; $j<count($imagens); $j++){
                              
-                                echo "<div class='col-lg-3 col-sm-4 col-6' id='remove-{$j}'><a href='#img_fim' class='{$j}' >";
+                                echo "<div class='col-lg-3 col-sm-4 col-6' id='remove-{$j}'><a href='#img_fim' >";
                                 echo    "<div class='remover_img'>Deletar</div>";
                                 echo        "<img src='./uploads/$imagens[$j]' class='thumbnail img-responsive'>";
                                 echo "</div>";
@@ -320,6 +320,7 @@ while($img = mysqli_fetch_assoc($rstImage)){
                     <div class="form-group">
                         <div class="col-md-12 text-center">
                             <button type="submit" class="btn btn-primary btn-lg">Alterar</button>
+                            <a href="/orcamento.php?id=<?=$id?>" class="btn btn-primary btn-lg" >Orçamento<a>
                         </div>
                     </div>
                     </fieldset>
@@ -338,10 +339,9 @@ $('#datepicker').change(function(){
 });
 
 $('.remover_img').click(function(){
-    var remover = $('.col-lg-3').html();
-    var id = remover.substring(26, 27)
-    var img = remover.substring(87, 112);
-    console.log('remover:', id);
+    var remover = $(this).parent().html();
+    var id = remover.substring(78, 79);
+    var img = remover.substring(58, 83);
 
     // Deleta a imagem
         $.ajax({
