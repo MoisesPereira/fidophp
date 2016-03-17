@@ -1,5 +1,5 @@
 <?php
-require('Conexao.class.php');
+require('./db/Conexao.class.php');
 
 $id = isset($_POST['id_cliente']) ? $_POST['id_cliente'] : '';
 
@@ -44,7 +44,7 @@ $observacao = $_POST['observacao'];
 
       if($q){
          echo "Alteração realizada com sucesso!";
-         echo "<meta HTTP-EQUIV='refresh' CONTENT='2;URL=detalhes.php?id={$id}'>";
+         echo "<meta HTTP-EQUIV='refresh' CONTENT='2;URL=/detalhes.php?id={$id}'>";
       }
 
    } catch (Exception $e) {

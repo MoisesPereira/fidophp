@@ -1,6 +1,6 @@
 <?php
 require('header.php');
-require('Conexao.class.php');
+require('./model/Conexao.class.php');
 
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 $nome = isset($_GET['nome']) ? $_GET['nome'] : '';
@@ -77,7 +77,7 @@ $tp_servico = isset($_POST['tp_servico']) ? $_POST['tp_servico'] : '';
 // Popula o Combo Box de Serviços
 $(document).ready(function(){
         $.ajax({
-        url: 'http://fidophp.com.br/getServicos.ajax.php',
+        url: "<?=URL?>Ajax/getServicos.ajax.php",
         success: function(response){
 
             var parse = JSON.parse(response);
@@ -96,7 +96,7 @@ $(document).ready(function(){
 
     // Busca os funcionarios cadastrados
         $.ajax({
-            url: 'http://fidophp.com.br/getFuncionario.ajax.php',
+            url: "<?=URL?>Ajax/getFuncionario.ajax.php",
             success: function(response){
 
                 var parse = JSON.parse(response);

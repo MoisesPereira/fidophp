@@ -1,6 +1,6 @@
 <?php
 require('header.php');
-require('Conexao.class.php');
+require('./model/db/Conexao.class.php');
 
 $query = "select date_format(ts.dt_cadastro, '%c') mes, ts.valor from tb_servico ts";
 

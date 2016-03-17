@@ -77,6 +77,10 @@
 
 </head>
 
+<?php
+require('config.php');
+?>
+
 <? $actual_link = $_SERVER['PHP_SELF'];
 
 if($actual_link != '/orcamento.php'){ ?>

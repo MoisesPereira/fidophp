@@ -1,6 +1,6 @@
 <?php
 require('header.php');
-require('Conexao.class.php');
+require('./model/db/Conexao.class.php');
 
 $id = $_GET['id'];
 
@@ -47,7 +47,7 @@ while($img = mysqli_fetch_assoc($rstImage)){
     <div class="row">
         <div class="col-md-12">
             <div class="well well-sm">
-                <form class="form-horizontal" method="post" action="./alterarServico.php" enctype="multipart/form-data">
+                <form class="form-horizontal" method="post" action="./model/alterarServico.php" enctype="multipart/form-data">
                     <fieldset>
                         <legend class="text-center header">Ordem de Serviço: <b style='color:red'><?=$id; ?></b> </legend>
 
@@ -345,7 +345,7 @@ $('.remover_img').click(function(){
 
     // Deleta a imagem
         $.ajax({
-            url: 'http://fidophp.com.br/Ajax/removeImage.ajax.php?img='+img,
+            url: "<?=URL?>Ajax/removeImage.ajax.php?img="+img,
             success: function(response){
 
                 console.log('Deu Certo', response);
@@ -363,7 +363,7 @@ $(document).ready(function(){
 
         // Busca os Serviços
         $.ajax({
-        url: 'http://fidophp.com.br/getServicos.ajax.php',
+        url: "<?=URL?>Ajax/getServicos.ajax.php",
         success: function(response){
 
             var parse = JSON.parse(response);
@@ -382,7 +382,7 @@ $(document).ready(function(){
 
         // Busca as formas de pagamento
         $.ajax({
-            url: 'http://fidophp.com.br/getFormaPagamento.ajax.php',
+            url: "<?=URL?>Ajax/getFormaPagamento.ajax.php",
             success: function(response){
 
                 var parse = JSON.parse(response);
@@ -403,7 +403,7 @@ $(document).ready(function(){
 
     // Busca os funcionarios cadastrados
         $.ajax({
-            url: 'http://fidophp.com.br/getFuncionario.ajax.php',
+            url: "<?=URL?>Ajax/getFuncionario.ajax.php",
             success: function(response){
 
                 var parse = JSON.parse(response);

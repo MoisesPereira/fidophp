@@ -1,5 +1,5 @@
 <?php
-require('Conexao.class.php');
+require('./db/Conexao.class.php');
 
 $nome = $_POST['fname'];
 $email = $_POST['email'];

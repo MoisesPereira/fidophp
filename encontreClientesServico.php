@@ -1,6 +1,6 @@
 <?php
 require('header.php');
-require('Conexao.class.php');
+require('./model/db/Conexao.class.php');
 
 ?>
 
@@ -60,7 +60,7 @@ $('#submit-cliente').click(function(event) {
     var telefone = $('#telefone').val();
 
     $.ajax({
-        url: 'http://fidophp.com.br/getClientes.ajax.php?nome='+nome+'&email='+email+'&telefone='+telefone,
+        url: "<?=URL?>Ajax/getClientes.ajax.php?nome="+nome+"&email="+email+"&telefone="+telefone,
         success: function(response){
 
             var parse = JSON.parse(response);

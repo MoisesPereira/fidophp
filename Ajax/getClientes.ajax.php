@@ -1,5 +1,5 @@
 <?php
-require('Conexao.class.php');
+require('../model/db/Conexao.class.php');
 
 $nome = $_GET['nome'];
 $email = $_GET['email'];

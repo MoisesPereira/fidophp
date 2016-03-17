@@ -1,10 +1,10 @@
 <?php
-require('Conexao.class.php');
+require('../model/db/Conexao.class.php');
 
 
 $conn = Conexao::getInstace();
 
-$query = "select * from tb_funcionario where ativo = 1";
+$query = "select * from tb_forma_pagamento";
 $q = mysqli_query($conn, $query);
 
 $dados = array();

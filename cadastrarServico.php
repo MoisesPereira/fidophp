@@ -2,7 +2,7 @@
 //error_reporting(E_ALL);
 //ini_set("display_errors", 1);
 require('header.php');
-require('Conexao.class.php');
+require('./model/db/Conexao.class.php');
 
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 $nome = isset($_GET['nome']) ? $_GET['nome'] : '';
@@ -18,7 +18,7 @@ $telefone = isset($_GET['telefone']) ? $_GET['telefone'] : '';
     <div class="row">
         <div class="col-md-12">
             <div class="well well-sm">
-                <form class="form-horizontal" method="post" action="./insertServico.php" enctype="multipart/form-data">
+                <form class="form-horizontal" method="post" action="./model/insertServico.php" enctype="multipart/form-data">
                     <fieldset>
                         <legend class="text-center header">Novo Serviço</legend>
 
@@ -206,7 +206,7 @@ $telefone = isset($_GET['telefone']) ? $_GET['telefone'] : '';
 $(document).ready(function(){
     // Busca os tipos de Serviços
         $.ajax({
-            url: 'http://fidophp.com.br/getServicos.ajax.php',
+            url: "<?=URL?>Ajax/getServicos.ajax.php",
             success: function(response){
 
                 var parse = JSON.parse(response);
@@ -227,7 +227,7 @@ $(document).ready(function(){
 
     // Busca os funcionarios cadastrados
         $.ajax({
-            url: 'http://fidophp.com.br/getFuncionario.ajax.php',
+            url: "<?=URL?>Ajax/getFuncionario.ajax.php",
             success: function(response){
 
                 var parse = JSON.parse(response);
@@ -248,7 +248,7 @@ $(document).ready(function(){
 
     // Busca as formas de pagamento
         $.ajax({
-            url: 'http://fidophp.com.br/getFormaPagamento.ajax.php',
+            url: "<?=URL?>Ajax/getFormaPagamento.ajax.php",
             success: function(response){
 
                 var parse = JSON.parse(response);

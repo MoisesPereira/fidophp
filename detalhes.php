@@ -1,6 +1,6 @@
 <?php
 require('header.php');
-require('Conexao.class.php');
+require('./model/db/Conexao.class.php');
 
 $idCliente = $_GET['id'];
 
@@ -14,7 +14,7 @@ $t = mysqli_fetch_assoc($q);
     <div class="row">
         <div class="col-md-12">
             <div class="well well-sm">
-                <form class="form-horizontal" method="post" action="/alterarCliente.php">
+                <form class="form-horizontal" method="post" action="/model/alterarCliente.php">
                     <fieldset>
                         <legend class="text-center header">Detalhes do Clientes</legend>
 

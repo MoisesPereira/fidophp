@@ -1,5 +1,5 @@
 <?php
-require('../Conexao.class.php');
+require('../model/db/Conexao.class.php');
 
 $desc_img = $_GET['img'];
 

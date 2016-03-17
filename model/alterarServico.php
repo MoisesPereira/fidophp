@@ -2,8 +2,8 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-require('Conexao.class.php');
-require('./WideImage/lib/WideImage.php');
+require('./db/Conexao.class.php');
+require('../WideImage/lib/WideImage.php');
 
 $id = isset($_POST['id_servico']) ? $_POST['id_servico'] : '';
 $nome = isset($_POST['fname']) ? $_POST['fname'] : '';
@@ -93,7 +93,7 @@ $q = mysqli_query($conn, $sql);
 
                if($qImg){
                   echo "cadastro realizado com sucesso!";
-                  echo "<meta HTTP-EQUIV='refresh' CONTENT='2;URL=detalhesServico.php?id={$id}'>";
+                  echo "<meta HTTP-EQUIV='refresh' CONTENT='2;URL=/detalhesServico.php?id={$id}'>";
                }
                
             } catch (Exception $e) {

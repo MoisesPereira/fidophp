@@ -2,8 +2,9 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-require('Conexao.class.php');
-require('./WideImage/lib/WideImage.php');
+require('./db/Conexao.class.php');
+require('../WideImage/lib/WideImage.php');
+
 $data_entrada = isset($_POST['data-entrada']) ? $_POST['data-entrada'] : '';
 if($data_entrada != ''){$data_entrada = explode('/', $data_entrada); $data_entrada = $data_entrada[2].'-'.$data_entrada[1].'-'.$data_entrada[0];}
 
@@ -88,7 +89,7 @@ $returnId = mysqli_insert_id($conn);
 
                if($qImg){
                   echo "cadastro realizado com sucesso!";
-                  echo "<meta HTTP-EQUIV='refresh' CONTENT='2;URL=detalhesServico.php?id={$returnId}'>";
+                  echo "<meta HTTP-EQUIV='refresh' CONTENT='2;URL=/detalhesServico.php?id={$returnId}'>";
                }
                
             } catch (Exception $e) {
@@ -102,6 +103,6 @@ $returnId = mysqli_insert_id($conn);
 }    
 
 echo "cadastro realizado com sucesso!";
-echo "<meta HTTP-EQUIV='refresh' CONTENT='2;URL=detalhesServico.php?id={$returnId}'>"  
+echo "<meta HTTP-EQUIV='refresh' CONTENT='2;URL=/detalhesServico.php?id={$returnId}'>"  
 
 ?>
